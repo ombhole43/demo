@@ -1,0 +1,14 @@
+public class StringConcatenation {
+    public static void main(String[] args) {
+        String originalString = "Hello, ";
+        String stringToConcatenate = "World!";
+        
+        String concatenatedString = concatenateStrings(originalString, stringToConcatenate);
+        
+        System.out.println("Concatenated String: " + concatenatedString);
+    }
+    
+    public static String concatenateStrings(String original, String toConcatenate) {
+        return original.concat(toConcatenate);
+    }
+}
