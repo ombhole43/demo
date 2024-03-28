@@ -1,0 +1,21 @@
+public class StringComparison {
+    public static void main(String[] args) {
+        String mainString = "Hello, World!";
+        String sequenceToCompare = "Hello";
+        
+        int comparisonResult = compareStrings(mainString, sequenceToCompare);
+        
+        if (comparisonResult == 0) {
+            System.out.println("The string is equal to the specified sequence.");
+        } else if (comparisonResult < 0) {
+            System.out.println("The string comes before the specified sequence.");
+        } else {
+            System.out.println("The string comes after the specified sequence.");
+        }
+    }
+    
+    public static int compareStrings(String mainString, String sequence) {
+       
+        return mainString.compareTo(sequence);
+    }
+}
