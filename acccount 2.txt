@@ -1,0 +1,77 @@
+abstract class BankAccount {
+    protected double balance;
+
+    public BankAccount(double initialBalance) {
+        this.balance = initialBalance;
+    }
+
+    public abstract void deposit(double amount);
+
+    public abstract void withdraw(double amount);
+
+    public double getBalance() {
+        return balance;
+    }
+}
+
+class SavingsAccount extends BankAccount {
+    public SavingsAccount(double initialBalance) {
+        super(initialBalance);
+    }
+
+    @Override
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited: $" + amount);
+    }
+
+    @Override
+    public void withdraw(double amount) {
+        if (balance - amount >= 0) {
+            balance -= amount;
+            System.out.println("Withdrawn: $" + amount);
+        } else {
+            System.out.println("Insufficient funds for withdrawal.");
+        }
+    }
+}
+
+class CurrentAccount extends BankAccount {
+    public CurrentAccount(double initialBalance) {
+        super(initialBalance);
+    }
+
+    @Override
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited: $" + amount);
+    }
+
+    @Override
+    public void withdraw(double amount) {
+        if (balance - amount >= -500) { 
+            balance -= amount;
+            System.out.println("Withdrawn: $" + amount);
+        } else {
+            System.out.println("Insufficient funds for withdrawal.");
+        }
+    }
+}
+
+public class Account2 {
+    public static void main(String[] args) {
+        SavingsAccount savingsAccount = new SavingsAccount(1000);
+        savingsAccount.deposit(500);
+        savingsAccount.withdraw(200);
+
+        CurrentAccount currentAccount = new CurrentAccount(2000);
+        currentAccount.deposit(1000);
+        currentAccount.withdraw(3000);
+    }
+}
+
+Output:
+Deposited: $500.0
+Withdrawn: $200.0
+Deposited: $1000.0
+Withdrawn: $3000.0

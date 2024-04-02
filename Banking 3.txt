@@ -1,0 +1,134 @@
+import java.util.Scanner;
+
+interface Account {
+    void deposit(double amount);
+    void withdraw(double amount);
+    double calculateInterest();
+    double getBalance();
+}
+
+class SavingAccount implements Account {
+    private double balance;
+    private double interestRate;
+
+    public SavingAccount(double initialBalance, double interestRate) {
+        this.balance = initialBalance;
+        this.interestRate = interestRate;
+    }
+
+    @Override
+    public void deposit(double amount) {
+        balance += amount;
+    }
+
+    @Override
+    public void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+        } else {
+            System.out.println("Insufficient funds!");
+        }
+    }
+
+    @Override
+    public double calculateInterest() {
+        return balance * interestRate;
+    }
+
+    @Override
+    public double getBalance() {
+        return balance;
+    }
+
+    public void applyInterest() {
+        double interest = calculateInterest();
+        deposit(interest);
+    }
+}
+
+class CurrentAccount implements Account {
+    private double balance;
+
+    public CurrentAccount(double initialBalance) {
+        this.balance = initialBalance;
+    }
+
+    @Override
+    public void deposit(double amount) {
+        balance += amount;
+    }
+
+    @Override
+    public void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+        } else {
+            System.out.println("Insufficient funds!");
+        }
+    }
+
+    @Override
+    public double calculateInterest() {
+       
+        return 0;
+    }
+
+    @Override
+    public double getBalance() {
+        return balance;
+    }
+
+    public void issueOverdraft(double amount) {
+        if (amount <= 1000) {
+            balance -= amount;
+        } else {
+            System.out.println("Cannot issue overdraft beyond limit!");
+        }
+    }
+}
+
+class Bank {
+    private Account[] accounts;
+    private int numAccounts;
+
+    public Bank(int maxSize) {
+        accounts = new Account[maxSize];
+        numAccounts = 0;
+    }
+
+    public void addAccount(Account account) {
+        if (numAccounts < accounts.length) {
+            accounts[numAccounts] = account;
+            numAccounts++;
+        } else {
+            System.out.println("Cannot add more accounts. Bank is full.");
+        }
+    }
+
+    public void displayAllAccounts() {
+        for (int i = 0; i < numAccounts; i++) {
+            System.out.println("Account " + (i + 1) + ": Balance = " + accounts[i].getBalance());
+        }
+    }
+}
+
+public class Banking {
+    public static void main(String[] args) {
+        Bank bank = new Bank(10);
+
+        Account savingsAccount = new SavingsAccount(1000, 0.05);
+        Account currentAccount = new CurrentAccount(2000);
+
+        bank.addAccount(savingsAccount);
+        bank.addAccount(currentAccount);
+
+        ((SavingsAccount) savingsAccount).applyInterest(); 
+        ((CurrentAccount) currentAccount).issueOverdraft(500); 
+
+        bank.displayAllAccounts();
+    }
+}
+
+Output:
+Account 1: Balance = 1050.0
+Account 2: Balance = 1500.0

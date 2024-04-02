@@ -1,0 +1,151 @@
+interface Product {
+    void showProduct();
+    void addProduct(String productName, double price);
+    void deleteProduct(String productName);
+    double calculateProductPrice();
+}
+
+class OnlineProduct implements Product {
+    private String productName;
+    private double price;
+
+    public OnlineProduct() {
+        this.productName = "";
+        this.price = 0.0;
+    }
+
+    @Override
+    public void showProduct() {
+        System.out.println("Product Name: " + productName);
+        System.out.println("Price: $" + price);
+    }
+
+    @Override
+    public void addProduct(String productName, double price) {
+        this.productName = productName;
+        this.price = price;
+    }
+
+    @Override
+    public void deleteProduct(String productName) {
+        if (this.productName.equals(productName)) {
+            this.productName = "";
+            this.price = 0.0;
+        }
+    }
+
+    @Override
+    public double calculateProductPrice() {
+        return price;
+    }
+}
+
+class PhysicalProduct implements Product {
+    private String productName;
+    private double price;
+
+    public PhysicalProduct() {
+        this.productName = "";
+        this.price = 0.0;
+    }
+
+    @Override
+    public void showProduct() {
+        System.out.println("Product Name: " + productName);
+        System.out.println("Price: $" + price);
+    }
+
+    @Override
+    public void addProduct(String productName, double price) {
+        this.productName = productName;
+        this.price = price;
+    }
+
+    @Override
+    public void deleteProduct(String productName) {
+        if (this.productName.equals(productName)) {
+            this.productName = "";
+            this.price = 0.0;
+        }
+    }
+
+    @Override
+    public double calculateProductPrice() {
+        return price;
+    }
+}
+
+class Customer {
+    private String name;
+    private String address;
+
+    public Customer(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
+
+    public void placeOrder(Product product) {
+        double totalPrice = product.calculateProductPrice();
+        System.out.println("Customer " + name + " placed order for:");
+        product.showProduct();
+        System.out.println("Total Price: $" + totalPrice);
+    }
+}
+
+class Order {
+    private Product product;
+    private int quantity;
+
+    public Order(Product product, int quantity) {
+        this.product = product;
+        this.quantity = quantity;
+    }
+
+    public double calculateTotalPrice() {
+        return product.calculateProductPrice() * quantity;
+    }
+}
+
+public class Ecommerce {
+    public static void main(String[] args) {
+        
+        Product onlineProduct = new OnlineProduct();
+        Product physicalProduct = new PhysicalProduct();
+
+   
+        onlineProduct.addProduct("Online Product", 50.0);
+        physicalProduct.addProduct("Physical Product", 100.0);
+
+        
+        System.out.println("Online Product Details:");
+        onlineProduct.showProduct();
+        System.out.println();
+
+        System.out.println("Physical Product Details:");
+        physicalProduct.showProduct();
+        System.out.println();
+
+        Customer customer = new Customer("Om", "Pune");
+
+        customer.placeOrder(onlineProduct);
+        System.out.println();
+
+        customer.placeOrder(physicalProduct);
+    }
+}
+
+Output:
+Online Product Details:
+Product Name: Online Product
+Price: $50.0
+Physical Product Details:
+Product Name: Physical Product
+Price: $100.0
+Customer Om placed order for:
+Product Name: Online Product
+Price: $50.0
+Total Price: $50.0
+Customer Om placed order for:
+Product Name: Physical Product
+Price: $100.0
+Total Price: $100.0

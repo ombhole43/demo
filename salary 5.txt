@@ -1,0 +1,97 @@
+abstract class Employee {
+    private String name;
+    private int employeeId;
+
+    public Employee(String name, int employeeId) {
+        this.name = name;
+        this.employeeId = employeeId;
+    }
+
+    public abstract double calculateSalary();
+
+    public abstract void displayInfo();
+
+    public String getName() {
+        return name;
+    }
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+}
+
+class Manager extends Employee {
+    private double baseSalary;
+    private double bonus;
+
+    public Manager(String name, int employeeId, double baseSalary, double bonus) {
+        super(name, employeeId);
+        this.baseSalary = baseSalary;
+        this.bonus = bonus;
+    }
+
+    @Override
+    public double calculateSalary() {
+        return baseSalary + bonus;
+    }
+
+    @Override
+    public void displayInfo() {
+        System.out.println("Manager Information:");
+        System.out.println("Name: " + getName());
+        System.out.println("Employee ID: " + getEmployeeId());
+        System.out.println("Base Salary: $" + baseSalary);
+        System.out.println("Bonus: $" + bonus);
+        System.out.println("Total Salary: $" + calculateSalary());
+    }
+}
+
+class Programmer extends Employee {
+    private double hourlyRate;
+    private int hoursWorked;
+
+    public Programmer(String name, int employeeId, double hourlyRate, int hoursWorked) {
+        super(name, employeeId);
+        this.hourlyRate = hourlyRate;
+        this.hoursWorked = hoursWorked;
+    }
+
+    @Override
+    public double calculateSalary() {
+        return hourlyRate * hoursWorked;
+    }
+
+    @Override
+    public void displayInfo() {
+        System.out.println("Programmer Information:");
+        System.out.println("Name: " + getName());
+        System.out.println("Employee ID: " + getEmployeeId());
+        System.out.println("Hourly Rate: $" + hourlyRate);
+        System.out.println("Hours Worked: " + hoursWorked);
+        System.out.println("Total Salary: $" + calculateSalary());
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Manager manager = new Manager("John Manager", 101, 50000, 10000);
+        Programmer programmer = new Programmer("Alice Programmer", 201, 30, 40);
+
+        manager.displayInfo();
+        System.out.println(); 
+        programmer.displayInfo();
+    }
+}
+
+Output ::
+Manager Information:
+Name: John Manager
+Employee ID: 101
+Base Salary: $50000.0
+Bonus: $10000.0
+Total Salary: $60000.0
+
+Programmer Information:
+Name: Alice Programmer
+Employee ID: 201
+Hourly Rate: $30....
