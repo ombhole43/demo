@@ -1,0 +1,26 @@
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
+public class IntegerInput {
+    public static void main(String[] args) {
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(System.in);
+            System.out.print("Please enter an integer: ");
+            int number = scanner.nextInt();
+            System.out.println("You entered the integer: " + number);
+        } catch (InputMismatchException ime) {
+            System.out.println("That's not an integer. Please try again.");
+        } catch (NoSuchElementException nsee) {
+            System.out.println("Input was closed prematurely. Please ensure the input source is open.");
+        } finally {
+            if (scanner != null) {
+                scanner.close();
+            }
+        }
+    }
+}
+
+Output ::
+Please enter an integer: Input was closed prematurely. Please ensure the input source is open.

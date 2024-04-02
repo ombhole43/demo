@@ -1,0 +1,38 @@
+package com.java;
+public class oddnumber {
+    
+    static class OddNumberException extends Exception {
+        public OddNumberException(String message) {
+            super(message);
+        }
+    }
+    
+    static void checkEvenNumber(int number) throws OddNumberException {
+        if (number % 2 != 0) {
+            throw new OddNumberException("The number is odd.");
+        }
+    }
+    
+    public static void main(String[] args) {
+        int number1 = 10;
+        int number2 = 15;
+        
+        try {
+            checkEvenNumber(number1);
+            System.out.println(number1 + " is even.");
+        } catch (OddNumberException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        try {
+            checkEvenNumber(number2);
+            System.out.println(number2 + " is even.");
+        } catch (OddNumberException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+Output::
+10 is even.
+The number is odd.
