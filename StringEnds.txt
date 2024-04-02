@@ -1,0 +1,21 @@
+public class StringEndsWith {
+    public static void main(String[] args) {
+        String mainString = "Hello, World!";
+        String endsWithString = "World!";
+
+        boolean endsWith = checkEndsWith(mainString, endsWithString);
+
+        if (endsWith) {
+            System.out.println("The string ends with the specified string.");
+        } else {
+            System.out.println("The string does not end with the specified string.");
+        }
+    }
+
+    public static boolean checkEndsWith(String mainString, String endsWithString) {
+        
+        return mainString.endsWith(endsWithString);
+    }
+}
+Output::
+The string ends with the specified string.

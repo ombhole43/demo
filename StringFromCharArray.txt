@@ -1,0 +1,15 @@
+public class StringFromCharArray {
+    public static void main(String[] args) {
+        
+        char[] charArray = {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!'};
+
+       
+        String str = new String(charArray);
+
+      
+        System.out.println("String created from character array: " + str);
+    }
+}
+
+Output::
+String created from character array: Hello, World!

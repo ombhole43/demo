@@ -1,0 +1,22 @@
+public class StringSequenceTest {
+    public static void main(String[] args) {
+        String mainString = "Hello, World!";
+        String sequenceToCheck = "lo,";
+        
+        boolean containsSequence = containsSequence(mainString, sequenceToCheck);
+        
+        if (containsSequence) {
+            System.out.println("The string contains the specified sequence.");
+        } else {
+            System.out.println("The string does not contain the specified sequence.");
+        }
+    }
+    
+    public static boolean containsSequence(String mainString, String sequence) {
+        
+        return mainString.indexOf(sequence) != -1;
+    }
+}
+
+Output::
+The string contains the specified sequence.
