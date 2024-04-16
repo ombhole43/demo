@@ -1,0 +1,38 @@
+import java.util.TreeSet;
+
+public class TreeSetNumbersLessThanExample {
+    public static void main(String[] args) {
+     
+        TreeSet<Integer> treeSet = new TreeSet<>();
+
+        treeSet.add(5);
+        treeSet.add(2);
+        treeSet.add(8);
+        treeSet.add(1);
+        treeSet.add(6);
+        treeSet.add(4);
+        treeSet.add(9);
+
+        System.out.println("TreeSet elements: " + treeSet);
+
+        TreeSet<Integer> numbersLessThan7 = new TreeSet<>(treeSet.headSet(7));
+        System.out.println("Numbers less than 7: " + numbersLessThan7);
+
+        System.out.println("Numbers less than 7 (using lower()):");
+        for (Integer num : treeSet) {
+            if (num < 7) {
+                System.out.println(num);
+            }
+        }
+    }
+}
+
+Output::
+TreeSet elements: [1, 2, 4, 5, 6, 8, 9]
+Numbers less than 7: [1, 2, 4, 5, 6]
+Numbers less than 7 (using lower()):
+1
+2
+4
+5
+6

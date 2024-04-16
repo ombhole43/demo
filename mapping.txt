@@ -1,0 +1,21 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class MapSizeExample {
+    public static void main(String[] args) {
+
+        Map<String, Integer> map = new HashMap<>();
+
+        map.put("apple", 10);
+        map.put("banana", 20);
+        map.put("orange", 15);
+        map.put("grapes", 30);
+
+        int size = map.size();
+
+        System.out.println("Number of key-value mappings in the map: " + size);
+    }
+}
+
+Output::
+Number of key-value mappings in the map: 4

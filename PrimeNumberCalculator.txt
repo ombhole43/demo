@@ -1,0 +1,82 @@
+package com.demo;
+public class PrimeNumberCalculator{
+    private static final int NUM_THREADS = 4; 
+
+    public static void main(String[] args) {
+        int limit = 100; 
+        long sum = calculatePrimeSum(limit);
+        System.out.println("Sum of prime numbers up to " + limit + " is: " + sum);
+    }
+
+    public static long calculatePrimeSum(int limit) {
+        
+        PrimeSumThread[] threads = new PrimeSumThread[NUM_THREADS];
+
+        int segmentSize = limit / NUM_THREADS;
+        int start = 1;
+        int end = start + segmentSize - 1;
+
+        for (int i = 0; i < NUM_THREADS; i++) {
+            if (i == NUM_THREADS - 1) {
+                end = limit;
+            }
+            threads[i] = new PrimeSumThread(start, end);
+            threads[i].start();
+            start = end + 1;
+            end = start + segmentSize - 1;
+        }
+
+        long sum = 0;
+        for (PrimeSumThread thread : threads) {
+            try {
+                thread.join();
+                sum += thread.getSum();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return sum;
+    }
+
+    static class PrimeSumThread extends Thread {
+        private final int start;
+        private final int end;
+        private long sum;
+
+        public PrimeSumThread(int start, int end) {
+            this.start = start;
+            this.end = end;
+            this.sum = 0;
+        }
+
+        @Override
+        public void run() {
+            for (int num = start; num <= end; num++) {
+                if (isPrime(num)) {
+                    sum += num;
+                }
+            }
+        }
+
+        public long getSum() {
+            return sum;
+        }
+
+        private boolean isPrime(int num) {
+            if (num <= 1) {
+                return false;
+            }
+            for (int i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i == 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+}
+
+Output:
+Sum of prime numbers up to 100 is: 1060
+
